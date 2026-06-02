@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Controle de Compras</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#7c6af7">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Compras">
+  <link rel="apple-touch-icon" href="icons/icon-192.svg">
+  <link rel="icon" type="image/svg+xml" href="icons/icon-192.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="header-top">
+        <div class="logo-icon"><i class="ti ti-shopping-cart" aria-hidden="true"></i></div>
+        <h1>Controle de Compras</h1>
+      </div>
+      <p class="subtitle">Defina seu limite e acompanhe seus gastos em tempo real.</p>
+    </div>
+
+    <!-- Definir limite -->
+    <div class="card">
+      <div class="limit-row">
+        <div class="field">
+          <label>Limite de compras (R$)</label>
+          <input type="number" id="limite-input" placeholder="Ex: 1000,00" min="0" step="0.01">
+        </div>
+        <button class="btn-primary" onclick="definirLimite()">Definir limite</button>
+      </div>
+      <div class="error-msg" id="limite-erro"></div>
+    </div>
+
+    <!-- Métricas -->
+    <div class="metrics">
+      <div class="metric m-limite">
+        <div class="m-label">Limite</div>
+        <div class="m-value" id="m-limite">R$ 0,00</div>
+      </div>
+      <div class="metric m-gasto">
+        <div class="m-label">Gasto</div>
+        <div class="m-value" id="m-gasto">R$ 0,00</div>
+      </div>
+      <div class="metric m-restante">
+        <div class="m-label">Restante</div>
+        <div class="m-value" id="m-restante">R$ 0,00</div>
+      </div>
+    </div>
+
+    <!-- Progresso -->
+    <div class="progress-wrap">
+      <div class="progress-labels">
+        <span>Progresso do limite</span>
+        <span id="pct-label">0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+    </div>
+
+    <!-- Alerta -->
+    <div class="alert-bar" id="alert-bar">
+      <i class="ti ti-alert-triangle" aria-hidden="true"></i>
+      <span>Atenção: limite de compras atingido!</span>
+    </div>
+
+    <!-- Formulário de produto -->
+    <div class="card">
+      <div class="add-grid">
+        <div class="field">
+          <label>Produto</label>
+          <input type="text" id="nome-input" placeholder="Nome do produto">
+        </div>
+        <div class="field">
+          <label>Valor unitário (R$)</label>
+          <input type="number" id="valor-input" placeholder="0,00" min="0" step="0.01">
+        </div>
+        <div class="field field-qty">
+          <label>Qtd.</label>
+          <input type="number" id="qtd-input" placeholder="1" min="1" step="1" value="1">
+        </div>
+        <button class="btn-success" id="btn-adicionar" onclick="adicionarProduto()">
+          Adicionar produto
+        </button>
+      </div>
+      <div class="form-footer">
+        <div class="error-msg" id="produto-erro"></div>
+        <button class="btn-cancelar" id="btn-cancelar" onclick="cancelarEdicao()">
+          <i class="ti ti-x" aria-hidden="true"></i> Cancelar edição
+        </button>
+      </div>
+    </div>
+
+    <!-- Cabeçalho da lista -->
+    <div class="list-header">
+      <span class="list-count" id="lista-count">0 produtos</span>
+      <div class="list-actions">
+        <button class="btn-ghost export" onclick="exportarCSV()">
+          <i class="ti ti-file-spreadsheet" aria-hidden="true"></i> Exportar CSV
+        </button>
+        <button class="btn-ghost clear" onclick="limparTudo()">
+          <i class="ti ti-trash" aria-hidden="true"></i> Limpar tudo</button>
+      </div>
+    </div>
+
+    <!-- Lista -->
+    <div class="produtos-list" id="lista"></div>
+
+    <!-- Estado vazio -->
+    <div class="empty-state" id="empty-state">
+      <i class="ti ti-basket" aria-hidden="true"></i>
+      <p>Nenhum produto adicionado ainda.<br>Defina um limite e comece a registrar!</p>
+    </div>
+
+    <div class="footer">Controle de Compras&mdash;SEUS GASTOS EM TEMPO REAL</div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast">
+    <i class="ti ti-check" aria-hidden="true"></i>
+    <span id="toast-msg"></span>
+  </div>
+
+  <script src="script.js"></script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./service-worker.js')
+          .then(() => console.log('Service Worker registrado!'))
+          .catch(err => console.log('Erro SW:', err));
+      });
+    }
+  </script>
+
+</body>
+
+</html>
