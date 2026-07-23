@@ -186,7 +186,7 @@ function renderizar() {
 
   const barra = document.getElementById('progress-bar');
   barra.style.width = pct.toFixed(1) + '%';
-  barra.style.background = pct >= 100 ? '#e24b4a' : pct >= 80 ? '#ef9f27' : '#7c6af7';
+  barra.style.background = pct >= 100 ? '#ef4444' : pct >= 80 ? '#f59e0b' : '#3b82f6';
   document.getElementById('pct-label').textContent = pct.toFixed(0) + '%';
 
   const alerta = document.getElementById('alert-bar');

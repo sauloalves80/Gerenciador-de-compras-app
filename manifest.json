@@ -3,8 +3,8 @@
   "short_name": "Compras",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#0f1220",
-  "theme_color": "#7c6af7",
+  "background_color": "#f5f7fa",
+  "theme_color": "#3b82f6",
   "description": "Controle de compras com limite e acompanhamento de gastos.",
   "icons": [
     {
