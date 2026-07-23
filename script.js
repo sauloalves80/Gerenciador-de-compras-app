@@ -1,8 +1,13 @@
 // ── Estado ────────────────────────────────────────────
-let limite = 0;
-let produtos = [];
+let limite = parseFloat(localStorage.getItem('limite')) || 0;
+let produtos = JSON.parse(localStorage.getItem('produtos')) || [];
 let toastTimer = null;
 let editandoId = null;
+
+function salvarDados() {
+  localStorage.setItem('limite', limite);
+  localStorage.setItem('produtos', JSON.stringify(produtos));
+}
 
 // ── Utilitários ───────────────────────────────────────
 function fmt(valor) {
@@ -43,6 +48,7 @@ function definirLimite() {
   cancelarEdicao();
   document.getElementById('limite-input').value = '';
   renderizar();
+  salvarDados();
   showToast('Limite definido: ' + fmt(limite), 'ti-check');
 }
 
@@ -77,6 +83,7 @@ function adicionarProduto() {
   }
 
   renderizar();
+  salvarDados();
 }
 
 // ── Editar ────────────────────────────────────────────
@@ -122,6 +129,7 @@ function excluir(id) {
   produtos = produtos.filter(x => x.id !== id);
   if (editandoId === id) cancelarEdicao();
   renderizar();
+  salvarDados();
   if (p) showToast('"' + p.nome + '" removido.', 'ti-trash');
 }
 
@@ -132,6 +140,7 @@ function limparTudo() {
   produtos = [];
   cancelarEdicao();
   renderizar();
+  salvarDados();
   showToast('Lista limpa com sucesso!', 'ti-trash');
 }
 
