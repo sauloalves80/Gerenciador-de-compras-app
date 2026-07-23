@@ -539,6 +539,40 @@ justify-content:center;
 
 /* ── Responsivo ── */
 @media (max-width: 480px) {
+  body {
+    padding: 1rem 0.75rem 3rem;
+  }
+
+  .header {
+    padding: 1.25rem;
+  }
+
+  .header-top {
+    gap: 10px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  .subtitle {
+    margin-left: 46px;
+    font-size: 12px;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+
+  .limit-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .limit-row .btn-primary {
+    width: 100%;
+  }
+
   .add-grid {
     grid-template-columns: 1fr 1fr;
   }
@@ -553,5 +587,60 @@ justify-content:center;
 
   .metric .m-value {
     font-size: 15px;
+  }
+
+  .metric .m-label {
+    font-size: 9px;
+  }
+
+  .metric {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .produto-card {
+    padding: 10px 12px;
+  }
+
+  .produto-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+
+  .produto-nome {
+    font-size: 13px;
+  }
+
+  .produto-valor {
+    font-size: 14px;
+  }
+
+  .btn-edit,
+  .btn-del {
+    width: 28px;
+    height: 28px;
+  }
+
+  .list-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .list-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .btn-ghost {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+
+  .toast {
+    width: 90%;
+    white-space: normal;
+    text-align: center;
+    justify-content: center;
   }
 }
